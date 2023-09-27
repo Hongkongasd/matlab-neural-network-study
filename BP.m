@@ -1,0 +1,13 @@
+clear all;
+close all;
+P=-1:0.04:1;
+T=sin(2*pi*P)+0.1*randn(size(P));
+net=newff(P,T,18,{},'trainbr');
+net.trainParam.show=10;
+net.trainParam.epochs=100;
+net=train(net,P,T);
+Y=sim(net,P);
+figure;
+plot(P,T,'-',P,Y,'+');
+legend('原始信号','网络输出信号');
+set(gcf,'position',[20,20,500,400]);
